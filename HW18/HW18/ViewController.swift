@@ -23,21 +23,24 @@ class ViewController: UIViewController {
     }
     
     @IBAction func onShowPhotosButton(_ sender: Any) {
-        let alert = UIAlertController(title: "Info", message: "Coming soon...", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "Ok", style: .default)
-        alert.addAction(okAction)
-        present(alert, animated: true)
+        let galleryVC = GalleryViewController()
+        galleryVC.delegate = self
+        present(galleryVC, animated: true)
     }
 }
 
 extension ViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
-    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
         if let pickedImage = info[.originalImage] as? UIImage {
             addedImages.append(pickedImage)
         }
         
         picker.dismiss(animated: true)
+    }
+}
+
+extension ViewController: GalleryDelegate {
+    var images: [UIImage] {
+        return addedImages
     }
 }
