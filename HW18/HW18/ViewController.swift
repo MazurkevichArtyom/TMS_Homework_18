@@ -27,6 +27,10 @@ class ViewController: UIViewController {
         galleryVC.delegate = self
         present(galleryVC, animated: true)
     }
+    @IBAction func onSettingsButton(_ sender: Any) {
+        let settingsVC = SettingsViewController()
+        present(settingsVC, animated: true)
+    }
 }
 
 extension ViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {

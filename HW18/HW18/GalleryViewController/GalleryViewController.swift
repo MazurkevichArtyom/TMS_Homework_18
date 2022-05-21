@@ -9,7 +9,7 @@ import UIKit
 
 class GalleryViewController: UIViewController {
     
-    private let cellsSpacing: CGFloat = 4.0
+    private let cellsSpacing: CGFloat = 2.0
     private let cellsInRow: CGFloat = 3
     private let galleryCellKey = "galleryCell"
     
