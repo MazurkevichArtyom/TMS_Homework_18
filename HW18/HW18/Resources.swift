@@ -8,5 +8,5 @@
 import Foundation
 
 enum KeychainKey: String {
-    case userPassword = "user_password"
+    case galleryPasscode = "gallery_passcode"
 }

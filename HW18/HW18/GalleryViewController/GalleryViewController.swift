@@ -32,9 +32,9 @@ class GalleryViewController: UIViewController {
         customNavigationBar.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(customNavigationBar)
         
-        let doneButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(onCancelButton))
+        let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(onCancelButton))
         let navigationItem = UINavigationItem(title: "Gallery")
-        navigationItem.leftBarButtonItem = doneButton
+        navigationItem.leftBarButtonItem = cancelButton
         customNavigationBar.items = [navigationItem]
         
         customNavigationBar.heightAnchor.constraint(equalToConstant: 44.0).isActive = true
