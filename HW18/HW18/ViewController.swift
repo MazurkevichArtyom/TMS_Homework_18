@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import KeychainSwift
 
 class ViewController: UIViewController {
     
@@ -25,7 +26,41 @@ class ViewController: UIViewController {
     @IBAction func onShowPhotosButton(_ sender: Any) {
         let galleryVC = GalleryViewController()
         galleryVC.delegate = self
-        present(galleryVC, animated: true)
+        presentViewControllerWithSecurityCheck(viewController: galleryVC)
+    }
+    
+    @IBAction func onSettingsButton(_ sender: Any) {
+        let settingsVC = SettingsViewController()
+        presentViewControllerWithSecurityCheck(viewController: settingsVC)
+    }
+    
+    private func presentViewControllerWithSecurityCheck(viewController: UIViewController) {
+        let keychain = KeychainSwift()
+        if let passcode = keychain.get(KeychainKey.galleryPasscode.rawValue) {
+            presentEnterPasscodeAlert(passcode: passcode, viewController: viewController)
+        } else {
+            present(viewController, animated: true)
+        }
+    }
+    
+    private func presentEnterPasscodeAlert(passcode: String, viewController: UIViewController) {
+        let enterPasscodeAlert = UIAlertController(title: "Please enter your Passcode", message: nil, preferredStyle: UIAlertController.Style.alert)
+        
+        enterPasscodeAlert.addTextField { (passcodeTextField) in
+            passcodeTextField.placeholder = "Passcode"
+            passcodeTextField.isSecureTextEntry = true
+        }
+        
+        enterPasscodeAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        enterPasscodeAlert.addAction(UIAlertAction(title: "Done", style: .default) { _ in
+            if let textFieldValue = enterPasscodeAlert.textFields?.first?.text {
+                if textFieldValue == passcode {
+                    self.present(viewController, animated: true)
+                }
+            }
+        })
+        
+        present(enterPasscodeAlert, animated: true, completion: nil)
     }
 }
 
