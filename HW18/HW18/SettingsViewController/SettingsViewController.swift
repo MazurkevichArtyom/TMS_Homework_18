@@ -59,7 +59,7 @@ class SettingsViewController: UIViewController {
         
         switcher.translatesAutoresizingMaskIntoConstraints = false
         switcher.addTarget(self, action: #selector(onSwitchVlaueChanged), for: .valueChanged)
-
+        
         view.addSubview(switcher)
         
         switcher.centerYAnchor.constraint(equalTo: passwordLabel.centerYAnchor).isActive = true
@@ -94,7 +94,7 @@ class SettingsViewController: UIViewController {
         self.setupAction = setupAction
         
         passcodeOnAlert.addAction(setupAction)
-
+        
         passcodeOnAlert.addTextField { passcodeTextField in
             passcodeTextField.placeholder = "Passcode"
             passcodeTextField.isSecureTextEntry = true
